@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="日期:"
+        android:textSize="40sp" />
+
+    <EditText
+        android:id="@+id/DateInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:inputType="date"/>
+
+    <RadioGroup
+        android:id="@+id/radGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp">
+
+        <RadioButton
+            android:id="@+id/BreakFast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="早餐"
+            android:textSize="30sp" />
+
+        <RadioButton
+            android:id="@+id/Lunch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="午餐"
+            android:textSize="30sp" />
+
+        <RadioButton
+            android:id="@+id/Dinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="晚餐"
+            android:textSize="30sp" />
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/ChoiceFood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@string/eatWhat" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text="金額:"/>
+
+    <EditText
+        android:id="@+id/SpendMoney"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:inputType="number"/>
+    <TextView
+        android:id="@+id/InfoShow"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:textSize="30sp"
+        android:text="here"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        >
+
+        <Button
+            android:id="@+id/btnInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="輸入"
+            />
+
+        <Button
+            android:id="@+id/btnShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="顯示"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>

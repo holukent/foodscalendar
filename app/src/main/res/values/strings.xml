@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Class</string>
+
+    <string-array name="foods">
+        <item>飯</item>
+        <item>麵</item>
+        <item>冬粉</item>
+        <item>粄條</item>
+    </string-array>
+    <string name="eatWhat">吃啥?</string>
+</resources>
