@@ -7,26 +7,33 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="日期:"
-        android:textSize="40sp" />
-
-    <EditText
-        android:id="@+id/DateInput"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
-        android:inputType="date"/>
+        android:layout_weight="0.1"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="日期:"
+            android:textSize="40sp" />
+        <EditText
+            android:id="@+id/DateInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:textSize="40sp" />
+    </LinearLayout>
+
 
     <RadioGroup
         android:id="@+id/radGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.1"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingBottom="5dp">
+        >
 
         <RadioButton
             android:id="@+id/BreakFast"
@@ -39,6 +46,8 @@
             android:id="@+id/Lunch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:text="午餐"
             android:textSize="30sp" />
 
@@ -54,51 +63,60 @@
         android:id="@+id/ChoiceFood"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.1"
         android:prompt="@string/eatWhat" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="40sp"
-        android:text="金額:"/>
-
-    <EditText
-        android:id="@+id/SpendMoney"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
-        android:inputType="number"/>
+        android:layout_weight="0.1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="金額:"
+            android:textSize="40sp" />
+
+        <EditText
+            android:id="@+id/SpendMoney"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textSize="40sp" />
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/InfoShow"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:textSize="30sp"
-        android:text="here"/>
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:text="here's johnny\nhere's johnny\nhere's johnny\nhere's johnny\nhere's johnny\nhere's johnny\nhere's johnny\nhere's johnny\nhere's johnny\nhere's johnny\n"
+        android:textSize="30sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        >
+        android:layout_weight="0.1"
+        android:layout_gravity="center">
 
         <Button
             android:id="@+id/btnInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="輸入"
-            />
+            android:text="輸入" />
 
         <Button
             android:id="@+id/btnShow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:text="顯示"/>
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="顯示" />
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </LinearLayout>

@@ -10,27 +10,24 @@ import androidx.core.view.get
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private val foodlist = mutableListOf<Foods>()
-    lateinit var time: String
     lateinit var spinnerchoice: String
+    lateinit var infoshow: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var time = ""
         val datainput = findViewById<EditText>(R.id.DateInput)
         val radgroup = findViewById<RadioGroup>(R.id.radGroup)
-        val radbreakfast = findViewById<RadioButton>(R.id.BreakFast)
-        val radlunch = findViewById<RadioButton>(R.id.Lunch)
-        val raddinner = findViewById<RadioButton>(R.id.Dinner)
         val spinner = findViewById<Spinner>(R.id.ChoiceFood)
         val spendmoney = findViewById<EditText>(R.id.SpendMoney)
-        val infoshow = findViewById<TextView>(R.id.InfoShow)
         val btninput = findViewById<Button>(R.id.btnInput)
         val btnshow = findViewById<Button>(R.id.btnShow)
 
-        infoshow.movementMethod = ScrollingMovementMethod.getInstance()
-
-        radgroup.setOnCheckedChangeListener { group, checkedId -> checkradgroup(group, checkedId) }
+        infoshow = findViewById<TextView>(R.id.InfoShow).also {
+            it.movementMethod = ScrollingMovementMethod.getInstance()
+        }
 
         ArrayAdapter.createFromResource(
             this,
@@ -43,34 +40,45 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         }
         spinner.onItemSelectedListener = this
 
-
-        btninput.setOnClickListener {
-            savetolist(
-                datainput,
-                time,
-                spinner,
-                spendmoney.text.toString().toInt()
-            )
+        radgroup.setOnCheckedChangeListener { group, checkedId ->
+            time = when (checkedId) {
+                R.id.BreakFast -> findViewById<RadioButton>(R.id.BreakFast).text.toString()
+                R.id.Lunch -> findViewById<RadioButton>(R.id.Lunch).text.toString()
+                R.id.Dinner -> findViewById<RadioButton>(R.id.Dinner).text.toString()
+                else -> ""
+            }
         }
+
+        btninput.setOnClickListener { savetolist(datainput, time, spinner, spendmoney) }
         btnshow.setOnClickListener { infoshowtext() }
     }
 
     private fun infoshowtext() {
-
-    }
-
-    private fun checkradgroup(group: RadioGroup, checkedId: Int) {
-        when (checkedId) {
-            R.id.BreakFast -> time = findViewById<RadioButton>(R.id.BreakFast).text.toString()
-            R.id.Lunch -> time = findViewById<RadioButton>(R.id.Lunch).text.toString()
-            R.id.Dinner -> time = findViewById<RadioButton>(R.id.Dinner).text.toString()
+        var str = ""
+        if (foodlist.isEmpty())
+            Toast.makeText(this, "清單是空的", Toast.LENGTH_SHORT).show()
+        else {
+            repeat(foodlist.size) {
+                str += "${foodlist[it]}\n"
+            }
         }
-        Toast.makeText(this, time, Toast.LENGTH_SHORT).show()
+        infoshow.text = str
     }
 
-    private fun savetolist(date: EditText, time: String, spinner: Spinner, money: Int = 0) {
-        foodlist.add(Foods(date.text.toString(), time, spinnerchoice, money))
-        Toast.makeText(this, "${foodlist[0]}", Toast.LENGTH_SHORT).show()
+    private fun savetolist(date: EditText, time: String, spinner: Spinner, money: EditText) {
+
+        if (date.text.toString() == "" || time == "" || money.text.toString() == "")
+            when {
+                date.text.toString() == "" ->
+                    Toast.makeText(this, "請輸入日期", Toast.LENGTH_SHORT).show()
+                time == "" ->
+                    Toast.makeText(this, "請輸入時間", Toast.LENGTH_SHORT).show()
+                money.text.toString() == "" ->
+                    Toast.makeText(this, "請輸入金額", Toast.LENGTH_SHORT).show()
+            } else {
+            foodlist.add(Foods(date.text.toString(), time, spinnerchoice, money.text.toString()))
+            Toast.makeText(this, "${foodlist.last()}", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -80,6 +88,4 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     override fun onNothingSelected(parent: AdapterView<*>?) {
         TODO("Not yet implemented")
     }
-
-
 }
