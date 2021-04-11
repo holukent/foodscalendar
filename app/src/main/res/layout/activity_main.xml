@@ -10,19 +10,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.1"
-        >
+        android:layout_weight="0.1">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="日期:"
             android:textSize="40sp" />
+
         <EditText
             android:id="@+id/DateInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="date"
-            android:textSize="40sp" />
+            android:textSize="40sp"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/EditPicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:textSize="30sp"/>
     </LinearLayout>
 
 
@@ -32,8 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
         android:gravity="center"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/BreakFast"
@@ -97,8 +105,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.1"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_weight="0.1">
 
         <Button
             android:id="@+id/btnInput"

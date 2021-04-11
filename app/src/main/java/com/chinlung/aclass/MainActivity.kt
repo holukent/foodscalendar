@@ -1,11 +1,13 @@
 package com.chinlung.aclass
 
+import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.*
 import androidx.core.view.get
+import java.util.*
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
@@ -25,31 +27,46 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             it.movementMethod = ScrollingMovementMethod.getInstance()
         }
 
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.foods,
-            R.layout.spinner_simple
-        ).also {
-            it.setDropDownViewResource(R.layout.spinner_item)
-            spinner.adapter = it
-//            spinner.setSelection(0,false)
+        //picker calendar
+        val calendar = Calendar.getInstance()
+        val editdate = findViewById<EditText>(R.id.EditPicker)
+        val datePickerlistener =
+            DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                editdate.setText("$year/$month/$dayOfMonth")
+            }
+        editdate.setOnClickListener {
+            DatePickerDialog(
+                this,
+                datePickerlistener,
+                calendar[Calendar.YEAR],
+                calendar[Calendar.MONTH],
+                calendar[Calendar.DAY_OF_MONTH]
+            ).show()
         }
+
+
+        ArrayAdapter.createFromResource(this, R.array.foods, R.layout.spinner_simple)
+            .also {
+                it.setDropDownViewResource(R.layout.spinner_item)
+                spinner.adapter = it
+//            spinner.setSelection(0,false)
+            }
         spinner.onItemSelectedListener = this
 
         //早午晚餐
         findViewById<RadioGroup>(R.id.radGroup)
             .setOnCheckedChangeListener { group, checkedId ->
-            time = when (checkedId) {
-                R.id.BreakFast -> findViewById<RadioButton>(R.id.BreakFast).text.toString()
-                R.id.Lunch -> findViewById<RadioButton>(R.id.Lunch).text.toString()
-                R.id.Dinner -> findViewById<RadioButton>(R.id.Dinner).text.toString()
-                else -> ""
+                time = when (checkedId) {
+                    R.id.BreakFast -> findViewById<RadioButton>(R.id.BreakFast).text.toString()
+                    R.id.Lunch -> findViewById<RadioButton>(R.id.Lunch).text.toString()
+                    R.id.Dinner -> findViewById<RadioButton>(R.id.Dinner).text.toString()
+                    else -> ""
+                }
             }
-        }
 
         //輸入清單
         findViewById<Button>(R.id.btnInput).setOnClickListener {
-            savetolist(datainput, time, spinnerchoice, spendmoney)
+            savetolist(editdate, time, spinnerchoice, spendmoney)
         }
 
         //顯示清單
