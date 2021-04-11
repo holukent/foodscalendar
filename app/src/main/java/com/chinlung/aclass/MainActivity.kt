@@ -32,9 +32,9 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         ArrayAdapter.createFromResource(
             this,
             R.array.foods,
-            android.R.layout.simple_list_item_1
+            R.layout.spinner_simple
         ).also {
-            it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            it.setDropDownViewResource(R.layout.spinner_item)
             spinner.adapter = it
 //            spinner.setSelection(0,false)
         }
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             Toast.makeText(this, "清單是空的", Toast.LENGTH_SHORT).show()
         else {
             repeat(foodlist.size) {
-                str += "${foodlist[it]}\n"
+                str = "日期${foodlist[it].date}:${foodlist[it].time} 花$${foodlist[it].money} 吃${foodlist[it].spinner}\n" + str
             }
         }
         infoshow.text = str
