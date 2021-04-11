@@ -92,7 +92,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.5"
         android:text="here's johnny\nhere's johnny\nhere's johnny\nhere's johnny\nhere's johnny\nhere's johnny\nhere's johnny\nhere's johnny\nhere's johnny\nhere's johnny\n"
-        android:textSize="30sp" />
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"

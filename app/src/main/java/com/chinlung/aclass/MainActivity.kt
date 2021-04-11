@@ -11,7 +11,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private val foodlist = mutableListOf<Foods>()
     lateinit var spinnerchoice: String
-    lateinit var infoshow: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,13 +18,10 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         var time = ""
         val datainput = findViewById<EditText>(R.id.DateInput)
-        val radgroup = findViewById<RadioGroup>(R.id.radGroup)
         val spinner = findViewById<Spinner>(R.id.ChoiceFood)
         val spendmoney = findViewById<EditText>(R.id.SpendMoney)
-        val btninput = findViewById<Button>(R.id.btnInput)
-        val btnshow = findViewById<Button>(R.id.btnShow)
 
-        infoshow = findViewById<TextView>(R.id.InfoShow).also {
+        val infoshow = findViewById<TextView>(R.id.InfoShow).also {
             it.movementMethod = ScrollingMovementMethod.getInstance()
         }
 
@@ -40,7 +36,9 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         }
         spinner.onItemSelectedListener = this
 
-        radgroup.setOnCheckedChangeListener { group, checkedId ->
+        //早午晚餐
+        findViewById<RadioGroup>(R.id.radGroup)
+            .setOnCheckedChangeListener { group, checkedId ->
             time = when (checkedId) {
                 R.id.BreakFast -> findViewById<RadioButton>(R.id.BreakFast).text.toString()
                 R.id.Lunch -> findViewById<RadioButton>(R.id.Lunch).text.toString()
@@ -49,23 +47,40 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             }
         }
 
-        btninput.setOnClickListener { savetolist(datainput, time, spinner, spendmoney) }
-        btnshow.setOnClickListener { infoshowtext() }
-    }
-
-    private fun infoshowtext() {
-        var str = ""
-        if (foodlist.isEmpty())
-            Toast.makeText(this, "清單是空的", Toast.LENGTH_SHORT).show()
-        else {
-            repeat(foodlist.size) {
-                str = "日期${foodlist[it].date}:${foodlist[it].time} 花$${foodlist[it].money} 吃${foodlist[it].spinner}\n" + str
-            }
+        //輸入清單
+        findViewById<Button>(R.id.btnInput).setOnClickListener {
+            savetolist(datainput, time, spinnerchoice, spendmoney)
         }
-        infoshow.text = str
+
+        //顯示清單
+        findViewById<Button>(R.id.btnShow).setOnClickListener {
+            var str = ""
+            if (foodlist.isEmpty())
+                Toast.makeText(this, "清單是空的", Toast.LENGTH_SHORT).show()
+            else {
+                repeat(foodlist.size) {
+                    str =
+                        "日期${foodlist[it].date}:${foodlist[it].time} 花$${foodlist[it].money} 吃${foodlist[it].spinner}\n" + str
+                }
+            }
+            infoshow.text = str
+        }
     }
 
-    private fun savetolist(date: EditText, time: String, spinner: Spinner, money: EditText) {
+//    private fun infoshowtext() {
+//        var str = ""
+//        if (foodlist.isEmpty())
+//            Toast.makeText(this, "清單是空的", Toast.LENGTH_SHORT).show()
+//        else {
+//            repeat(foodlist.size) {
+//                str =
+//                    "日期${foodlist[it].date}:${foodlist[it].time} 花$${foodlist[it].money} 吃${foodlist[it].spinner}\n" + str
+//            }
+//        }
+//        infoshow.text = str
+//    }
+
+    private fun savetolist(date: EditText, time: String, spinner: String, money: EditText) {
 
         if (date.text.toString() == "" || time == "" || money.text.toString() == "")
             when {
@@ -76,7 +91,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 money.text.toString() == "" ->
                     Toast.makeText(this, "請輸入金額", Toast.LENGTH_SHORT).show()
             } else {
-            foodlist.add(Foods(date.text.toString(), time, spinnerchoice, money.text.toString()))
+            foodlist.add(Foods(date.text.toString(), time, spinner, money.text.toString()))
             Toast.makeText(this, "${foodlist.last()}", Toast.LENGTH_SHORT).show()
         }
     }
