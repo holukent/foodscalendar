@@ -30,14 +30,16 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         //picker calendar
         val calendar = Calendar.getInstance()
         val editdate = findViewById<EditText>(R.id.EditPicker)
-        val datePickerlistener =
-            DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                editdate.setText("$year/$month/$dayOfMonth")
-            }
+//        val datePickerlistener =
+//            DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+//                editdate.setText("$year/$month/$dayOfMonth")
+//            }
         editdate.setOnClickListener {
             DatePickerDialog(
                 this,
-                datePickerlistener,
+                { _, year, month, dayOfMonth ->
+                    editdate.setText("$year/$month/$dayOfMonth")
+                },
                 calendar[Calendar.YEAR],
                 calendar[Calendar.MONTH],
                 calendar[Calendar.DAY_OF_MONTH]
