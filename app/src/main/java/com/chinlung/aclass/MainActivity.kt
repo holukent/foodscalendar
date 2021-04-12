@@ -28,13 +28,14 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         }
 
         //picker calendar
-        val calendar = Calendar.getInstance()
+
         val editdate = findViewById<EditText>(R.id.EditPicker)
 //        val datePickerlistener =
 //            DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
 //                editdate.setText("$year/$month/$dayOfMonth")
 //            }
         editdate.setOnClickListener {
+            val calendar = Calendar.getInstance()
             DatePickerDialog(
                 this,
                 { _, year, month, dayOfMonth ->
@@ -102,15 +103,15 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private fun savetolist(date: EditText, time: String, spinner: String, money: EditText) {
 
-        if (date.text.toString() == "" || time == "" || money.text.toString() == "")
-            when {
-                date.text.toString() == "" ->
-                    Toast.makeText(this, "請輸入日期", Toast.LENGTH_SHORT).show()
-                time == "" ->
-                    Toast.makeText(this, "請輸入時間", Toast.LENGTH_SHORT).show()
-                money.text.toString() == "" ->
-                    Toast.makeText(this, "請輸入金額", Toast.LENGTH_SHORT).show()
-            } else {
+        if (date.text.toString() == "" || time == "" || money.text.toString() == "") {
+            val wrong = when {
+                date.text.toString() == "" -> "請輸入日期"
+                time == "" -> "請輸入時間"
+                money.text.toString() == "" -> "請輸入金額"
+                else -> "something wrong"
+            }
+            Toast.makeText(this, wrong, Toast.LENGTH_SHORT).show()
+        } else {
             foodlist.add(Foods(date.text.toString(), time, spinner, money.text.toString()))
             Toast.makeText(this, "${foodlist.last()}", Toast.LENGTH_SHORT).show()
         }
