@@ -51,9 +51,10 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             .also {
                 it.setDropDownViewResource(R.layout.spinner_item)
                 spinner.adapter = it
-//            spinner.setSelection(0,false)
+                spinner.setSelection(0, false)
+                spinner.onItemSelectedListener = this
             }
-        spinner.onItemSelectedListener = this
+
 
         //早午晚餐
         findViewById<RadioGroup>(R.id.radGroup)
