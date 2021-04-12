@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         setContentView(R.layout.activity_main)
 
         var time = ""
-        val datainput = findViewById<EditText>(R.id.DateInput)
+//        val datainput = findViewById<EditText>(R.id.DateInput)
         val spinner = findViewById<Spinner>(R.id.ChoiceFood)
         val spendmoney = findViewById<EditText>(R.id.SpendMoney)
 
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             .also {
                 it.setDropDownViewResource(R.layout.spinner_item)
                 spinner.adapter = it
-                spinner.setSelection(0, false)
+//                spinner.setSelection(0, false)
                 spinner.onItemSelectedListener = this
             }
 
