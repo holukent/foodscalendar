@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 date.text.toString() == "" -> "請輸入日期"
                 time == "" -> "請輸入時間"
                 money.text.toString() == "" -> "請輸入金額"
-                else -> "something wrong"
+                else -> null
             }
             Toast.makeText(this, wrong, Toast.LENGTH_SHORT).show()
         } else {
